@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>BookAdapter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+BookAdapter.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">me.r8ch.library</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.annotation.NonNull</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.RecyclerView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.LayoutInflater</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.ViewGroup</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">me.r8ch.library.BookListActivity</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">BookAdapter </span><span class="s0">extends </span><span class="s1">RecyclerView.Adapter&lt;BookAdapter.BookViewHolder&gt; {</span>
+
+    <span class="s0">private </span><span class="s1">List&lt;Book&gt; bookList</span><span class="s0">;</span>
+    <span class="s0">public </span><span class="s1">BookAdapter(List&lt;BookListActivity.Book&gt; bookList) {</span>
+
+    <span class="s1">}</span>
+
+    <span class="s1">@NonNull</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent</span><span class="s0">, int </span><span class="s1">viewType) {</span>
+        <span class="s1">View itemView = LayoutInflater.from(parent.getContext())</span>
+                <span class="s1">.inflate(R.layout.activity_main</span><span class="s0">, </span><span class="s1">parent</span><span class="s0">, false</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">return new </span><span class="s1">BookViewHolder(itemView)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onBindViewHolder(@NonNull BookViewHolder holder</span><span class="s0">, int </span><span class="s1">position) {</span>
+        <span class="s1">Book book = bookList.get(position)</span><span class="s0">;</span>
+        <span class="s1">holder.yearTextView.setText(String.valueOf(book.year))</span><span class="s0">;</span>
+        <span class="s1">holder.titleTextView.setText(book.title)</span><span class="s0">;</span>
+        <span class="s1">holder.authorTextView.setText(book.author)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public int </span><span class="s1">getItemCount() {</span>
+        <span class="s0">return </span><span class="s1">bookList.size()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">updateBookList() {</span>
+        <span class="s1">updateBookList(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">updateBookList(List&lt;Book&gt; newBookList) {</span>
+        <span class="s1">bookList.clear()</span><span class="s0">;</span>
+        <span class="s1">bookList.addAll(newBookList)</span><span class="s0">;</span>
+        <span class="s1">notifyDataSetChanged()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static class </span><span class="s1">BookViewHolder </span><span class="s0">extends </span><span class="s1">RecyclerView.ViewHolder {</span>
+        <span class="s0">public </span><span class="s1">TextView yearTextView</span><span class="s0">;</span>
+        <span class="s0">public </span><span class="s1">TextView titleTextView</span><span class="s0">;</span>
+        <span class="s0">public </span><span class="s1">TextView authorTextView</span><span class="s0">;</span>
+
+        <span class="s0">public </span><span class="s1">BookViewHolder(View itemView) {</span>
+            <span class="s0">super</span><span class="s1">(itemView)</span><span class="s0">;</span>
+            <span class="s1">yearTextView = itemView.findViewById(R.id.textView)</span><span class="s0">;</span>
+            <span class="s1">titleTextView = itemView.findViewById(R.id.textView)</span><span class="s0">;</span>
+            <span class="s1">authorTextView = itemView.findViewById(R.id.textView)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private class </span><span class="s1">Book {</span>
+        <span class="s0">public char</span><span class="s1">[] year</span><span class="s0">;</span>
+        <span class="s0">public int </span><span class="s1">title</span><span class="s0">;</span>
+        <span class="s0">public int </span><span class="s1">author</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
